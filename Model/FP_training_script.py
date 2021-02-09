@@ -8,6 +8,7 @@ import torchaudio
 from torchaudio.datasets import SPEECHCOMMANDS
 from torch.utils.data import DataLoader
 import os
+import matplotlib.pyplot as plt
 
 torchaudio.set_audio_backend("soundfile")
 
@@ -34,4 +35,15 @@ class SubsetSC(SPEECHCOMMANDS):
 train_set = SubsetSC("training")
 test_set = SubsetSC("testing")
 
+
+#labels = sorted(list(set(datapoint[2] for datapoint in train_set)))
+#print(labels)
+
 waveform, sample_rate, label, speaker_id, utterance_number = train_set[0]
+
+
+print("Shape of waveform: {}".format(waveform.size()))
+print("Sample rate of waveform: {}".format(sample_rate))
+
+plt.plot(waveform.t().numpy());
+#plt.show()
